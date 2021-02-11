@@ -1,0 +1,18 @@
+@font-face{
+    src: url('fonts/Hack-Regular.ttf');
+    font-family: 'Hack';
+}
+body{
+    background-color:#21242B;
+    color: #747981;
+}
+
+.username-text{
+    color: #7ECC33;
+    font-family: Hack, monospace;
+}
+
+.directory-text{
+    font-family: Hack, monospace;
+    color: #5D7FA4;
+}
