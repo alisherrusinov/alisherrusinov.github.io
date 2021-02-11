@@ -4,7 +4,6 @@
 }
 body{
     background-color:#21242B;
-    color: #747981;
 }
 
 .username-text{
@@ -15,4 +14,18 @@ body{
 .directory-text{
     font-family: Hack, monospace;
     color: #5D7FA4;
+}
+
+.regular-text{
+    font-family: Hack, monospace;
+    color: #747981;
+}
+
+.text-input{
+    font-family: Hack, monospace;
+    background-color:#21242B;
+    color: #747981;
+    width: 400px;
+    border: none;
+    outline: none !important;
 }
