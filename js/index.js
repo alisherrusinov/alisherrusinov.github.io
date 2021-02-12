@@ -46,7 +46,18 @@ LS_STRING_SOFIAPAVLOVA = `
 
 CURRENT_DIRECTORY = '~'
 
-ABOUT_FILE = `<span class="regular-text">Тут будет инфа обо мне</span>`
+ABOUT_FILE = `
+<span class="regular-text">
+Алишер Русинов <br>
+Возраст: 18 лет <br>
+Навыки: 
+Python3,Django, Flask, Aiogram, PSQL, HTML5 CSS3. <br>
+ОС: Ubuntu, Windows <br>
+IDE: Pycharm <br>
+Telegram: @alisherrusinov <br>
+FreelanceHunt: <a href="https://freelancehunt.com/freelancer/alisher200316.html" target="_blank" class="directory-text">Ссылка</a>
+</span>
+`
 
 document.addEventListener("click", e => {
     document.getElementById('maininput').focus()
@@ -88,6 +99,12 @@ function add_ls() {
         </div>`
         document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
         document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_ABOUT);
+        EMPTY_LINE = `<div class="">
+        <span class="username-text">Client@alisherrusinov-site</span> <span class="directory-text"> ${CURRENT_DIRECTORY}</span><span class="regular-text">$</span>
+        <input type="text" class="text-input" id='previous' readonly value='cat about.txt'>
+        </div>`
+        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
+        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", ABOUT_FILE);
         window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
     }
     else if (CURRENT_DIRECTORY == '~/projects/AlexaSuck') {

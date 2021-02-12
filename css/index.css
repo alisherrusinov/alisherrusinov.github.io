@@ -1,6 +1,7 @@
 @font-face{
-    src: url('fonts/Hack-Regular.ttf');
+    src: url('../fonts/Hack-Regular.ttf');
     font-family: 'Hack';
+    font-size: 15px;
 }
 body{
     background-color:#21242B;
