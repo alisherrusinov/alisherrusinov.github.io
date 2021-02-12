@@ -16,10 +16,22 @@ body{
     color: #5D7FA4;
 }
 
+.directory-text:hover{
+    text-decoration: underline;
+}
 .regular-text{
     font-family: Hack, monospace;
     color: #747981;
 }
+.file-text{
+    font-family: Hack, monospace;
+    color: #747981;
+}
+
+.file-text:hover { 
+    text-decoration: underline; /* Добавляем подчеркивание 
+                                   при наведении курсора мыши на ссылку */
+   }
 
 .text-input{
     font-family: Hack, monospace;
