@@ -86,7 +86,7 @@ function cd_click(text) {
         window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
     if (text == 'cd Projects') {
         CURRENT_DIRECTORY = '~/projects'
-        document.getElementById('current-directory').innerHTML += '/projects'
+        document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
         window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
     }
     else if (text == 'cd Home') {
