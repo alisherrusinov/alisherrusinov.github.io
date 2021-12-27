@@ -58,6 +58,24 @@ Telegram: @alisherrusinov <br>
 FreelanceHunt: <a href="https://freelancehunt.com/freelancer/alisher200316.html" target="_blank" class="directory-text">Ссылка</a>
 </span>
 `
+CMD_DIRECTORY_REL = {
+    "cd Projects": "~/projects",
+    "cd Home": "~",
+    "cd About me": "~/about_me",
+    "cat about.txt": "~/about_me",
+    "cd AlexaSuck": "~/projects/AlexaSuck",
+    "cd ParserKolesa": "~/projects/ParserKolesa",
+    "cd SofiaPavlova": "~/projects/SofiaPavlova"
+}
+
+DIRECTORY_STRING_REL = {
+    "~/projects": LS_STRING_PROJECTS,
+    "~":LS_STRING_HOME,
+    "~/about_me":LS_STRING_ABOUT,
+    "~/projects/AlexaSuck":LS_STRING_ALEXA,
+    "~/projects/ParserKolesa":LS_STRING_KOLESA,
+    "~/projects/SofiaPavlova":LS_STRING_SOFIAPAVLOVA
+}
 
 document.addEventListener("click", e => {
     document.getElementById('maininput').focus()
@@ -72,104 +90,68 @@ function add_ls_home() {
     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_HOME);
     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
 }
+
+function generate_empty_line(text){
+    EMPTY_LINE = `<div class="">
+    <span class="username-text">Client@alisherrusinov-site</span> <span class="directory-text"> ${CURRENT_DIRECTORY}</span><span class="regular-text">$</span>
+    <input type="text" class="text-input" id='previous' readonly value='${text}'>
+    </div>`
+    return EMPTY_LINE
+}
+
 add_ls_home();
-function add_ls() {
-    if (CURRENT_DIRECTORY == '~') {
-        EMPTY_LINE = `<div class="">
-        <span class="username-text">Client@alisherrusinov-site</span> <span class="directory-text"> ${CURRENT_DIRECTORY}</span><span class="regular-text">$</span>
-        <input type="text" class="text-input" id='previous' readonly value='ls'>
-        </div>`
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_HOME);
-        window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-    }
-    else if (CURRENT_DIRECTORY == '~/projects') {
-        EMPTY_LINE = `<div class="">
-        <span class="username-text">Client@alisherrusinov-site</span> <span class="directory-text"> ${CURRENT_DIRECTORY}</span><span class="regular-text">$</span>
-        <input type="text" class="text-input" id='previous' readonly value='ls'>
-        </div>`
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_PROJECTS);
-        window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-    }
-    else if (CURRENT_DIRECTORY == '~/about_me') {
-        EMPTY_LINE = `<div class="">
-        <span class="username-text">Client@alisherrusinov-site</span> <span class="directory-text"> ${CURRENT_DIRECTORY}</span><span class="regular-text">$</span>
-        <input type="text" class="text-input" id='previous' readonly value='ls'>
-        </div>`
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_ABOUT);
-        EMPTY_LINE = `<div class="">
-        <span class="username-text">Client@alisherrusinov-site</span> <span class="directory-text"> ${CURRENT_DIRECTORY}</span><span class="regular-text">$</span>
-        <input type="text" class="text-input" id='previous' readonly value='cat about.txt'>
-        </div>`
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", ABOUT_FILE);
-        window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-    }
-    else if (CURRENT_DIRECTORY == '~/projects/AlexaSuck') {
-        EMPTY_LINE = `<div class="">
-        <span class="username-text">Client@alisherrusinov-site</span> <span class="directory-text"> ${CURRENT_DIRECTORY}</span><span class="regular-text">$</span>
-        <input type="text" class="text-input" id='previous' readonly value='ls'>
-        </div>`
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_ALEXA);
-        window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-    }
-    else if (CURRENT_DIRECTORY == '~/projects/ParserKolesa') {
-        EMPTY_LINE = `<div class="">
-        <span class="username-text">Client@alisherrusinov-site</span> <span class="directory-text"> ${CURRENT_DIRECTORY}</span><span class="regular-text">$</span>
-        <input type="text" class="text-input" id='previous' readonly value='ls'>
-        </div>`
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_KOLESA);
-        window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-    }
-    else if (CURRENT_DIRECTORY == '~/projects/SofiaPavlova') {
-        EMPTY_LINE = `<div class="">
-        <span class="username-text">Client@alisherrusinov-site</span> <span class="directory-text"> ${CURRENT_DIRECTORY}</span><span class="regular-text">$</span>
-        <input type="text" class="text-input" id='previous' readonly value='ls'>
-        </div>`
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_SOFIAPAVLOVA);
-        window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-    }
+
+function add_ls(cmd) {
+    EMPTY_LINE = generate_empty_line('ls')
+    document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
+    document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", DIRECTORY_STRING_REL[CURRENT_DIRECTORY])
+    window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    // if (CURRENT_DIRECTORY == '~') {
+    //     EMPTY_LINE = generate_empty_line('cd Home')
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_HOME);
+    //     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    // }
+    // else if (CURRENT_DIRECTORY == '~/projects') {
+    //     EMPTY_LINE = generate_empty_line('cd Projects')
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_PROJECTS);
+    //     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    // }
+    // else if (CURRENT_DIRECTORY == '~/about_me') {
+    //     EMPTY_LINE = generate_empty_line('cd About me') 
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_ABOUT);
+
+    //     EMPTY_LINE = generate_empty_line('cat about.')
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", ABOUT_FILE);
+    //     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    // }
+    // else if (CURRENT_DIRECTORY == '~/projects/AlexaSuck') {
+    //     EMPTY_LINE = generate_empty_line()
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_ALEXA);
+    //     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    // }
+    // else if (CURRENT_DIRECTORY == '~/projects/ParserKolesa') {
+    //     EMPTY_LINE = generate_empty_line()
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_KOLESA);
+    //     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    // }
+    // else if (CURRENT_DIRECTORY == '~/projects/SofiaPavlova') {
+    //     EMPTY_LINE = generate_empty_line()
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
+    //     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_SOFIAPAVLOVA);
+    //     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    // }
 }
 
-function inputpress(e) {
-    if (e.keyCode == 13) {
-        text = document.getElementById('maininput').value
-        document.getElementById('maininput').value = ""
-
-        EMPTY_LINE = `<div class="">
-        <span class="username-text">Client@alisherrusinov-site</span> <span class="directory-text"> ${CURRENT_DIRECTORY}</span><span class="regular-text">$</span>
-        <input type="text" class="text-input" id='previous' readonly value="${text}">
-        </div>`
-        document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
-        window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-
-        if (text == 'ls') {
-            if (CURRENT_DIRECTORY == '~') {
-                document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_HOME);
-                window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-            }
-            else if (CURRENT_DIRECTORY == '~/projects') {
-                document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_PROJECTS);
-                window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-            }
-            else if (CURRENT_DIRECTORY == '~/about_me') {
-                document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", LS_STRING_ABOUT);
-                window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-            }
-        }
-    }
-}
 
 function about_file() {
-    EMPTY_LINE = `<div class="">
-        <span class="username-text">Client@alisherrusinov-site</span> <span class="directory-text"> ${CURRENT_DIRECTORY}</span><span class="regular-text">$</span>
-        <input type="text" class="text-input" id='previous' readonly value="cat about.txt">
-        </div>`
+    EMPTY_LINE = generate_empty_line()
+
     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
     document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", ABOUT_FILE);
@@ -178,61 +160,60 @@ function about_file() {
 
 function cd_click(text) {
     console.log(text)
-    EMPTY_LINE = `<div class="">
-        <span class="username-text">Client@alisherrusinov-site</span> <span class="directory-text"> ${CURRENT_DIRECTORY}</span><span class="regular-text">$</span>
-        <input type="text" class="text-input" id='previous' readonly value="${text}">
-        </div>`
-    document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    EMPTY_LINE = generate_empty_line(text)
+    document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", EMPTY_LINE);
 
-    //MAIN MENU
-    if (text == 'cd Projects') {
-        CURRENT_DIRECTORY = '~/projects'
-        document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
-        window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-        add_ls()
-    }
-    else if (text == 'cd Home') {
-        CURRENT_DIRECTORY = '~'
-        document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
-        window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-        add_ls()
-    }
-    else if (text == 'cd About me') {
-        CURRENT_DIRECTORY = '~/about_me'
-        document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
-        window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-        add_ls()
-    }
-    //MAIN MENU
+    CURRENT_DIRECTORY = CMD_DIRECTORY_REL[text]
+    document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
+    window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    add_ls(text)
 
+    // //MAIN MENU
+    // if (text == 'cd Projects') {
+    //     CURRENT_DIRECTORY = '~/projects'
+    //     document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
+    //     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    //     add_ls()
+    // }
+    // else if (text == 'cd Home') {
+    //     CURRENT_DIRECTORY = '~'
+    //     document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
+    //     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    //     add_ls()
+    // }
+    // else if (text == 'cd About me') {   
+    //     CURRENT_DIRECTORY = '~/about_me'
+    //     document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
+    //     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    //     add_ls()
+    // }
+    // else if (text == 'cat about.txt') {
+    //     if (CURRENT_DIRECTORY == '~/about_me') {
+    //         document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", ABOUT_FILE);
+    //         window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    //     }
+    // }
+    // else if (text == 'cd AlexaSuck') {
+    //     CURRENT_DIRECTORY = '~/projects/AlexaSuck'
+    //     document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
+    //     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    //     add_ls()
+    // }
+    // else if (text == 'cd ParserKolesa') {
+    //     CURRENT_DIRECTORY = '~/projects/ParserKolesa'
+    //     document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
+    //     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    //     add_ls()
+    // }
+    // else if (text == 'cd SofiaPavlova') {
+    //     CURRENT_DIRECTORY = '~/projects/SofiaPavlova'
+    //     document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
+    //     window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
+    //     add_ls()
+    // }
+    
+    function command_dispatcher(command){
 
-    //ABOUT
-    else if (text == 'cat about.txt') {
-        if (CURRENT_DIRECTORY == '~/about_me') {
-            document.getElementById('mainblock').insertAdjacentHTML("beforeBegin", ABOUT_FILE);
-            window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-        }
-    }
-    //ABOUT
-
-    //PROJECTS
-    else if (text == 'cd AlexaSuck') {
-        CURRENT_DIRECTORY = '~/projects/AlexaSuck'
-        document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
-        window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-        add_ls()
-    }
-    else if (text == 'cd ParserKolesa') {
-        CURRENT_DIRECTORY = '~/projects/ParserKolesa'
-        document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
-        window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-        add_ls()
-    }
-    else if (text == 'cd SofiaPavlova') {
-        CURRENT_DIRECTORY = '~/projects/SofiaPavlova'
-        document.getElementById('current-directory').innerHTML = CURRENT_DIRECTORY
-        window.scroll(0, document.getElementById('mainblock').getBoundingClientRect().bottom)
-        add_ls()
     }
 }
